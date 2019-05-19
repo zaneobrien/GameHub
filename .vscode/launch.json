@@ -1,0 +1,24 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-DemoApplication<gamecheckout>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.game.checkout.gamecheckout.DemoApplication",
+            "projectName": "game-checkout-backend",
+            "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-DemoApplication<gamecheckoutbackend>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.game.checkout.gamecheckout.DemoApplication",
+            "projectName": "gamecheckoutbackend",
+            "args": ""
+        }
+    ]
+}
