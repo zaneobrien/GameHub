@@ -25,8 +25,7 @@ public class DemoApplication {
                 User user = new User(name,name + "@domain.com","Passwordhere", LocalDateTime.now(), LocalDateTime.now());
                 userRepository.save(user);
             });
-            userRepository.findAll().forEach(p -> System.out.println(p.getUserId() + " " + p.getName() + " " + p.getEmail())
-            		);
+            userRepository.findAll().forEach(p -> System.out.println(p));
         };
     }
 }

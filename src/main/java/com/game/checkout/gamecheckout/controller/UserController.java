@@ -17,13 +17,13 @@ import com.game.checkout.gamecheckout.repository.UserRepository;
 @CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
  
+	private final UserRepository userRepository;
+	
     // standard constructor
     UserController(UserRepository userRepository){
         this.userRepository = userRepository;
     }
      
-    private final UserRepository userRepository;
- 
     @GetMapping("/users")
     public List<User> getUsers() {
         return (List<User>) userRepository.findAll();
@@ -45,7 +45,6 @@ public class UserController {
             User user = new User(name,name + "@domain.com","Passwordhere", LocalDateTime.now(), LocalDateTime.now());
             userRepository.save(user);
         });
-        userRepository.findAll().forEach(p -> System.out.println(p.getUserId() + " " + p.getName() + " " + p.getEmail())
-        		);
+        userRepository.findAll().forEach(p -> System.out.println(p));
     }
 }

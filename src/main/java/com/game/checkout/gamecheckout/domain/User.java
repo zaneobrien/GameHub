@@ -65,6 +65,14 @@ public class User {
     public LocalDateTime getLastModified(){
         return this.lastModified;
     }
+    
+    public String toString() {
+    	StringBuffer sb = new StringBuffer();
+    	
+    	sb.append(userId).append(" ").append(name).append(" ").append(email);
+    	
+    	return sb.toString();
+    }
 
 
 }
