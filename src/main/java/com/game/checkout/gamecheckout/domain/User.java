@@ -31,9 +31,7 @@ public class User {
     @Column(name = "LastModified")
     private LocalDateTime lastModified; //Is LocalDateTime an issue for JPA to convert?
 
-    public User() {
-        //deafult 
-    }
+    public User() {} // default constructor
 
     public User(String name, String email, String password, LocalDateTime dateAdded, LocalDateTime lastModified) {
         this.name = name;
