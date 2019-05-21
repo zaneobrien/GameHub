@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.stream.Stream;
 
 import com.game.checkout.gamecheckout.domain.User;
-import com.game.checkout.gamecheckout.domain.UserRepository;
+import com.game.checkout.gamecheckout.repository.UserRepository;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -25,7 +25,8 @@ public class DemoApplication {
                 User user = new User(name,name + "@domain.com","Passwordhere", LocalDateTime.now(), LocalDateTime.now());
                 userRepository.save(user);
             });
-            userRepository.findAll().forEach(p -> System.out.println(p.getUserId()));
+            userRepository.findAll().forEach(p -> System.out.println(p.getUserId() + " " + p.getName() + " " + p.getEmail())
+            		);
         };
     }
 }
