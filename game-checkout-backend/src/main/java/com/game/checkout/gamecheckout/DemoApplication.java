@@ -1,6 +1,10 @@
 package com.game.checkout.gamecheckout;
 
+import java.time.LocalDateTime;
 import java.util.stream.Stream;
+
+import com.game.checkout.gamecheckout.domain.User;
+import com.game.checkout.gamecheckout.domain.UserRepository;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -18,10 +22,10 @@ public class DemoApplication {
     CommandLineRunner init(UserRepository userRepository) {
         return args -> {
             Stream.of("John", "Julie", "Jennifer", "Helen", "Rachel").forEach(name -> {
-                User user = new User(name, name.toLowerCase() + "@domain.com");
+                User user = new User(name,name + "@domain.com","Passwordhere", LocalDateTime.now(), LocalDateTime.now());
                 userRepository.save(user);
             });
-            userRepository.findAll().forEach(System.out::println);
+            userRepository.findAll().forEach(p -> System.out.println(p.getUserId()));
         };
     }
 }

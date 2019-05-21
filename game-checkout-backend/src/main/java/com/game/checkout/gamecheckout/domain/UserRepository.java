@@ -1,4 +1,4 @@
-package com.game.checkout.gamecheckout;
+package com.game.checkout.gamecheckout.domain;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

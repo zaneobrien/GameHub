@@ -1,4 +1,4 @@
-package com.game.checkout.gamecheckout;
+package com.game.checkout.gamecheckout.domain;
 
 import java.util.List;
 
