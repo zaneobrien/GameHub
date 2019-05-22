@@ -26,10 +26,10 @@ public class User {
     private String password; //Temporary Type
 
     @Column(name = "DateAdded")
-    private LocalDateTime dateAdded; 
+    private LocalDateTime dateAdded = LocalDateTime.now(); 
 
     @Column(name = "LastModified")
-    private LocalDateTime lastModified; //Is LocalDateTime an issue for JPA to convert?
+    private LocalDateTime lastModified = LocalDateTime.now(); //Is LocalDateTime an issue for JPA to convert?
 
     public User() {} // default constructor
 

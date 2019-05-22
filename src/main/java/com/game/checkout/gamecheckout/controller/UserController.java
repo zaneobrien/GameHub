@@ -2,10 +2,15 @@ package com.game.checkout.gamecheckout.controller;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import javax.transaction.Transactional;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,7 +35,8 @@ public class UserController {
     }
  
     @PostMapping("/users")
-    void addUser(@RequestBody User user) {
+    public void addUser(@RequestBody User user) {
+    	
         userRepository.save(user);
     }
     
@@ -47,4 +53,19 @@ public class UserController {
         });
         userRepository.findAll().forEach(p -> System.out.println(p));
     }
+    
+    @Transactional
+    @GetMapping("/user/{name}")
+    public List <User> getUsersByName(@PathVariable("name") String name) {
+    	
+    	return userRepository.findAllByName(name);
+    }
+    
+    @Transactional
+    @GetMapping("/user/thing/{something}")
+    public List <User> getUsersBySomething(@PathVariable("something") String something) {
+    	
+    	return userRepository.findAllByEmail(something).collect(Collectors.toList());
+    }
+    
 }

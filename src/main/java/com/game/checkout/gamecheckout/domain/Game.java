@@ -27,7 +27,8 @@ public class Game {
 	private LocalDateTime dateAdded;
 	private LocalDateTime lastModified;
 	
-	// TODO: possibly use Builder pattern to build object since most of these parameters are optional
+	public Game() {}
+	
 	public Game(String gameId, String title, String playerCount, Integer playTime, Integer age, Integer complexity,
 			String designer, String publisher, String yearPublished, String rating, LocalDateTime dateAdded,
 			LocalDateTime lastModified) {
@@ -92,6 +93,54 @@ public class Game {
 
 	public LocalDateTime getLastModified() {
 		return lastModified;
+	}
+
+	public void setGameId(String gameId) {
+		this.gameId = gameId;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public void setPlayerCount(String playerCount) {
+		this.playerCount = playerCount;
+	}
+
+	public void setPlayTime(Integer playTime) {
+		this.playTime = playTime;
+	}
+
+	public void setAge(Integer age) {
+		this.age = age;
+	}
+
+	public void setComplexity(Integer complexity) {
+		this.complexity = complexity;
+	}
+
+	public void setDesigner(String designer) {
+		this.designer = designer;
+	}
+
+	public void setPublisher(String publisher) {
+		this.publisher = publisher;
+	}
+
+	public void setYearPublished(String yearPublished) {
+		this.yearPublished = yearPublished;
+	}
+
+	public void setRating(String rating) {
+		this.rating = rating;
+	}
+
+	public void setDateAdded(LocalDateTime dateAdded) {
+		this.dateAdded = dateAdded;
+	}
+
+	public void setLastModified(LocalDateTime lastModified) {
+		this.lastModified = lastModified;
 	}
 	
 }
