@@ -21,7 +21,7 @@ public class GameController {
         this.gameRepository = gameRepository;
     }
     
-    @GetMapping("/getGames")
+    @GetMapping("/games")
     public List<Game> getGames() {
     	return (List<Game>) gameRepository.findAll();
     }

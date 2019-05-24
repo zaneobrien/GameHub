@@ -2,7 +2,6 @@ package com.game.checkout.gamecheckout.controller;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -52,6 +51,11 @@ public class UserController {
             userRepository.save(user);
         });
         userRepository.findAll().forEach(p -> System.out.println(p));
+    }
+    
+    @GetMapping("/reset")
+    public void reset() {
+    	userRepository.deleteAll();
     }
     
     @Transactional

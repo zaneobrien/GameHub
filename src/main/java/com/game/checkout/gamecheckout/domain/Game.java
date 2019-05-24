@@ -14,7 +14,7 @@ public class Game {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "GameId")
-	private String gameId;
+	private Integer gameId;
 	private String title;
 	private String playerCount;
 	private Integer playTime;
@@ -29,11 +29,11 @@ public class Game {
 	
 	public Game() {}
 	
-	public Game(String gameId, String title, String playerCount, Integer playTime, Integer age, Integer complexity,
+	public Game(String title, String playerCount, Integer playTime, Integer age, Integer complexity,
 			String designer, String publisher, String yearPublished, String rating, LocalDateTime dateAdded,
 			LocalDateTime lastModified) {
 		super();
-		this.gameId = gameId;
+		//this.gameId = gameId;
 		this.title = title;
 		this.playerCount = playerCount;
 		this.playTime = playTime;
@@ -47,7 +47,7 @@ public class Game {
 		this.lastModified = lastModified;
 	}
 
-	public String getGameId() {
+	public Integer getGameId() {
 		return gameId;
 	}
 
@@ -95,7 +95,7 @@ public class Game {
 		return lastModified;
 	}
 
-	public void setGameId(String gameId) {
+	public void setGameId(Integer gameId) {
 		this.gameId = gameId;
 	}
 
