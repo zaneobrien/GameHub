@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.game.checkout.gamecheckout.domain.Game;
-import com.game.checkout.gamecheckout.repository.GameRepository;
+import com.game.checkout.gamecheckout.repository.GameRepository; 
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
