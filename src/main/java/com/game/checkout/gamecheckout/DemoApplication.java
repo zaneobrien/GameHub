@@ -31,6 +31,7 @@ public class DemoApplication {
             
             Game dominion = new Game("Dominion", "2-4", 30, 13, 5, "david x vaccarino", "unknown", "2008", "4", LocalDateTime.now(), LocalDateTime.now());
             gameRepository.save(dominion);
+            //gameRepository.save(dominion);
         };
         
     }

@@ -1,12 +1,14 @@
 package com.game.checkout.gamecheckout.domain;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Game {
@@ -26,6 +28,9 @@ public class Game {
 	private String rating;
 	private LocalDateTime dateAdded;
 	private LocalDateTime lastModified;
+	
+	@OneToMany(mappedBy="Game")
+	private List <History> histories;
 	
 	public Game() {}
 	

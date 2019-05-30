@@ -16,4 +16,8 @@ public interface UserRepository extends JpaRepository<User, Long>{
 	
 	// black magic reflection happening here
 	public Stream <User> findAllByEmail(String something);
+	
+	//public Stream <User> findAll();
+
+	// TODO: how do i findAll then filter results?  or is there a better way?
 }

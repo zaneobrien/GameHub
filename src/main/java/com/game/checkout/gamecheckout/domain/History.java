@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-//import javax.persistence.OneToMany;
 
 @Entity
 public class History {
@@ -17,10 +16,9 @@ public class History {
     @Column(name = "HistoryId")
     private Long historyId;
 
-    //TODO: @OneToMany(mappedBy = "")
     @Column(name = "UserId")
     private Long userId;
-
+    
     @Column(name = "GameId")
     private Long gameId;
 
@@ -30,12 +28,7 @@ public class History {
     @Column(name = "DateCheckedIn")
     private LocalDateTime dateCheckedIn;
 
-
-    //Constructors
-
-    public History(){
-        //Default Constructor
-    }
+    public History() {}
 
     public History(Long userId, Long gameId, LocalDateTime dateCheckedOut, LocalDateTime dateCheckedIn){
         this.userId = userId;
@@ -43,8 +36,6 @@ public class History {
         this.dateCheckedOut = dateCheckedOut;
         this.dateCheckedIn = dateCheckedIn;
     }
-
-    //Getters and Setters
 
     public Long getHistoryId(){
         return this.historyId;
