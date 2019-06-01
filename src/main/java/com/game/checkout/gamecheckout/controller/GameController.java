@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.game.checkout.gamecheckout.domain.Game;
@@ -19,8 +21,14 @@ public class GameController {
         this.gameRepository = gameRepository;
     }
     
-    @GetMapping("/getGames")
+    @GetMapping("/games")
     public List<Game> getGames() {
     	return (List<Game>) gameRepository.findAll();
     }
+    
+    @PostMapping("/addGame")
+    public void setGame(@RequestBody Game game) {
+    	this.gameRepository.save(game);
+    }
+    
 }
