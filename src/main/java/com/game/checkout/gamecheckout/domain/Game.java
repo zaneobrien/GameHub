@@ -7,6 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Game {
@@ -16,11 +19,17 @@ public class Game {
 	@Column(name = "GameId")
 	private Integer gameId;
 
+	@NotNull(message = "Game title cannot be null")
 	@Column(name = "Title")
 	private String title;
 
-	@Column(name = "PlayerCount")
-	private String playerCount;
+	@Min(value = 1, message = "Game must require at least one player.")
+	@Column(name = "MinPlayerCount")
+	private Integer minPlayerCount;
+
+	@Max(value = 10000, message = "I highly doubt there's that many players.")
+	@Column(name = "MaxPlayerCount")
+	private Integer maxPlayerCount;
 
 	@Column(name = "PlayTime")
 	private Integer playTime;
@@ -51,13 +60,14 @@ public class Game {
 	
 	public Game() {}
 	
-	public Game(String title, String playerCount, Integer playTime, Integer age, Integer complexity,
+	public Game(String title, Integer minPlayerCount, Integer maxPlayerCount, Integer playTime, Integer age, Integer complexity,
 			String designer, String publisher, String yearPublished, String rating, LocalDateTime dateAdded,
 			LocalDateTime lastModified) {
 		super();
 		//this.gameId = gameId;
 		this.title = title;
-		this.playerCount = playerCount;
+		this.minPlayerCount = minPlayerCount;
+		this.maxPlayerCount = maxPlayerCount;
 		this.playTime = playTime;
 		this.age = age;
 		this.complexity = complexity;
@@ -77,8 +87,12 @@ public class Game {
 		return title;
 	}
 
-	public String getPlayerCount() {
-		return playerCount;
+	public Integer getMinPlayerCount() {
+		return minPlayerCount;
+	}
+
+	public Integer getMaxPlayerCount() {
+		return maxPlayerCount;
 	}
 
 	public Integer getPlayTime() {
@@ -125,8 +139,12 @@ public class Game {
 		this.title = title;
 	}
 
-	public void setPlayerCount(String playerCount) {
-		this.playerCount = playerCount;
+	public void setMinPlayerCount(Integer minPlayerCount) {
+		this.minPlayerCount = minPlayerCount;
+	}
+
+	public void setMaxPlayerCount(Integer maxPlayerCount) {
+		this.maxPlayerCount = maxPlayerCount;
 	}
 
 	public void setPlayTime(Integer playTime) {
