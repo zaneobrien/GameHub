@@ -15,16 +15,38 @@ public class Game {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "GameId")
 	private Integer gameId;
+
+	@Column(name = "Title")
 	private String title;
+
+	@Column(name = "PlayerCount")
 	private String playerCount;
+
+	@Column(name = "PlayTime")
 	private Integer playTime;
+
+	@Column(name = "Age")
 	private Integer age;
+
+	@Column(name = "Complexity")
 	private Integer complexity;
+
+	@Column(name = "Designer")
 	private String designer;
+
+	@Column(name = "Publisher")
 	private String publisher;
+
+	@Column(name = "YearPublished")
 	private String yearPublished;
+
+	@Column(name = "Rating")
 	private String rating;
+
+	@Column(name = "DateAdded")
 	private LocalDateTime dateAdded;
+
+	@Column(name = "LastModified")
 	private LocalDateTime lastModified;
 	
 	public Game() {}
