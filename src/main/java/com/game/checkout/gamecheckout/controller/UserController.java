@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.game.checkout.gamecheckout.domain.User;
@@ -28,15 +30,21 @@ public class UserController {
         this.userRepository = userRepository;
     }
      
-    @GetMapping("/users")
+    @GetMapping("/getUser")
     public List<User> getUsers() {
         return (List<User>) userRepository.findAll();
     }
  
-    @PostMapping("/users")
+    @PostMapping("/addUser")
     public void addUser(@RequestBody User user) {
     	
         userRepository.save(user);
+    }
+
+    @PutMapping("updateUser")
+    public @ResponseBody String updateGame(@RequestBody User user){
+        this.userRepository.save(user);
+        return "Updated";
     }
     
     @GetMapping("/userCount")
