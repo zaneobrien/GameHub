@@ -29,7 +29,7 @@ public class DemoApplication {
             });
             userRepository.findAll().forEach(p -> System.out.println(p));
             
-            Game dominion = new Game("Dominion", "2-4", 30, 13, 5, "david x vaccarino", "unknown", "2008", "4", LocalDateTime.now(), LocalDateTime.now());
+            Game dominion = new Game("Dominion", 2, 4, 30, 13, 5, "david x vaccarino", "unknown", "2008", "4", LocalDateTime.now(), LocalDateTime.now());
             gameRepository.save(dominion);
         };
         
