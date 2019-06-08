@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.game.checkout.gamecheckout.domain.User;
+import com.game.checkout.gamecheckout.domain.Password;
+import com.game.checkout.gamecheckout.repository.PasswordRepository;
 import com.game.checkout.gamecheckout.repository.UserRepository;
 
 @RestController
@@ -26,13 +28,15 @@ import com.game.checkout.gamecheckout.repository.UserRepository;
 public class UserController {
  
     private final UserRepository userRepository;
+    private final PasswordRepository passwordRepository;  //TODO: Should this be in its own repo class?  Its tightly coupled
     
     @Autowired
     private PasswordEncoder passwordEncoder;
 	
     // standard constructor
-    UserController(UserRepository userRepository){
+    UserController(UserRepository userRepository, PasswordRepository passwordRepository){
         this.userRepository = userRepository;
+        this.passwordRepository = passwordRepository;
     }
      
     @GetMapping("/getUsers")
@@ -40,19 +44,21 @@ public class UserController {
         return (List<User>) userRepository.findAll();
     }
  
-    @PostMapping("/addUser")
-    public @ResponseBody String addUser(@RequestBody User user) {
+    @PostMapping("/addUser/{password}")
+    public @ResponseBody String addUser(@RequestBody User user, @PathVariable("password") String passwordStr) {
         
         //Password Security
-        String hashedPassword = passwordEncoder.encode(user.getPassword());
-        user.setPassword(hashedPassword);
+        String hashedPassword = passwordEncoder.encode(passwordStr);
+        Password password = new Password(user, hashedPassword);
 
         userRepository.save(user);
+        passwordRepository.save(password);
+
 
         return "User Added";
     }
 
-    //TODO: Discuss whether this is a good method of passing login info
+    //TODO: Discuss whether this is a good method of passing login info, is the password unsafe in the URL
     @PostMapping("/authenticate/{userEmail}/{password}")
     public @ResponseBody String authenticate(@PathVariable("userEmail") String userEmail, @PathVariable("password") String password){
         
@@ -60,7 +66,7 @@ public class UserController {
         User user = getUserByEmail(userEmail); //TODO: Is this a proper reuse of code below?
         
         //Check if password matches
-        if(passwordEncoder.matches(password, user.getPassword())){
+        if(passwordEncoder.matches(password, passwordRepository.findByUser(user).getPassword())){
             return "Success";
         }
         return "Fail";
