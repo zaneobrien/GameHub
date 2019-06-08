@@ -16,4 +16,6 @@ public interface UserRepository extends JpaRepository<User, Long>{
 	
 	// black magic reflection happening here
 	public Stream <User> findAllByEmail(String something);
+
+	public User findByEmail(String email);
 }

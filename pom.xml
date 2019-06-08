@@ -1,24 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	
+	<!-- Project Details -->
+	<groupId>com.game.checkout</groupId>
+	<artifactId>gamecheckoutbackend</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>demo</name>
+	<description>Demo project for Spring Boot</description>
+	<modelVersion>4.0.0</modelVersion>
+
 	<!-- Properties -->
 	<properties>
 		<java.version>11</java.version>
     	<spring-security.version>5.0.6.RELEASE</spring-security.version>
 	</properties>
 
-	<modelVersion>4.0.0</modelVersion>
+	<!-- TODO: Determine what exactly we get from this parent -->
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.1.4.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.game.checkout</groupId>
-	<artifactId>gamecheckoutbackend</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>demo</name>
-	<description>Demo project for Spring Boot</description>
+	
 
 	<!-- Dependencies -->
 	<dependencies>
@@ -68,5 +72,7 @@
 			</plugin>
 		</plugins>
 	</build>
+
+	
 
 </project>

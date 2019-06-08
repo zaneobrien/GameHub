@@ -7,6 +7,8 @@ import java.util.stream.Stream;
 
 import javax.transaction.Transactional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,22 +25,45 @@ import com.game.checkout.gamecheckout.repository.UserRepository;
 @CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
  
-	private final UserRepository userRepository;
+    private final UserRepository userRepository;
+    
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 	
     // standard constructor
     UserController(UserRepository userRepository){
         this.userRepository = userRepository;
     }
      
-    @GetMapping("/getUser")
+    @GetMapping("/getUsers")
     public List<User> getUsers() {
         return (List<User>) userRepository.findAll();
     }
  
     @PostMapping("/addUser")
-    public void addUser(@RequestBody User user) {
-    	
+    public @ResponseBody String addUser(@RequestBody User user) {
+        
+        //Password Security
+        String hashedPassword = passwordEncoder.encode(user.getPassword());
+        user.setPassword(hashedPassword);
+
         userRepository.save(user);
+
+        return "User Added";
+    }
+
+    //TODO: Discuss whether this is a good method of passing login info
+    @PostMapping("/authenticate/{userEmail}/{password}")
+    public @ResponseBody String authenticate(@PathVariable("userEmail") String userEmail, @PathVariable("password") String password){
+        
+        //Get user from given email
+        User user = getUserByEmail(userEmail); //TODO: Is this a proper reuse of code below?
+        
+        //Check if password matches
+        if(passwordEncoder.matches(password, user.getPassword())){
+            return "Success";
+        }
+        return "Fail";
     }
 
     @PutMapping("updateUser")
@@ -71,6 +96,12 @@ public class UserController {
     public List <User> getUsersByName(@PathVariable("name") String name) {
     	
     	return userRepository.findAllByName(name);
+    }
+
+    @Transactional
+    @GetMapping("/user/email/{email}")
+    public User getUserByEmail(@PathVariable("email") String email) {
+    	return userRepository.findByEmail(email);
     }
     
     @Transactional
