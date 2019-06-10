@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class User {
@@ -18,9 +20,11 @@ public class User {
     @Column(name = "UserId")
     private Long userId;
 
+    @NotNull(message = "Name is required to enter a User")
     @Column(name = "Name")
     private String name;
 
+    @Email(message = "Please enter a valid email")
     @Column(name = "Email")
     private String email;
 
