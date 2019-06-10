@@ -1,12 +1,14 @@
 package com.game.checkout.gamecheckout.domain;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -57,6 +59,9 @@ public class Game {
 
 	@Column(name = "LastModified")
 	private LocalDateTime lastModified;
+	
+	@OneToMany(mappedBy="Game")
+	private List <History> histories;
 	
 	public Game() {}
 	

@@ -1,3 +1,0 @@
-[submodule "game-checkout-frontend"]
-	path = game-checkout-frontend
-	url = https://github.com/zaneobrien/game-checkout-frontend.git
