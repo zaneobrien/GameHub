@@ -9,11 +9,11 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,6 +24,7 @@ import com.game.checkout.gamecheckout.repository.PasswordRepository;
 import com.game.checkout.gamecheckout.repository.UserRepository;
 
 @RestController
+// TODO: figure out how to add the server.address here to the CrossOrigin
 @CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
  
@@ -32,6 +33,10 @@ public class UserController {
     
     @Autowired
     private PasswordEncoder passwordEncoder;
+    
+    //TODO: Discuss?
+    @Value("${app.message}")
+    private String testing;
 	
     // standard constructor
     UserController(UserRepository userRepository, PasswordRepository passwordRepository){
@@ -41,6 +46,7 @@ public class UserController {
      
     @GetMapping("/getUsers")
     public List<User> getUsers() {
+        System.out.println(testing);
         return (List<User>) userRepository.findAll();
     }
  
@@ -70,12 +76,6 @@ public class UserController {
             return "Success";
         }
         return "Fail";
-    }
-
-    @PutMapping("updateUser")
-    public @ResponseBody String updateGame(@RequestBody User user){
-        this.userRepository.save(user);
-        return "Updated";
     }
     
     @GetMapping("/userCount")

@@ -5,15 +5,14 @@ import java.util.List;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.game.checkout.gamecheckout.domain.Game;
-import com.game.checkout.gamecheckout.repository.GameRepository; 
+import com.game.checkout.gamecheckout.repository.GameRepository;
 
 @RestController
+// TODO: figure out how to add the server.address here to the CrossOrigin
 @CrossOrigin(origins = "http://localhost:4200")
 public class GameController {
 
@@ -31,12 +30,6 @@ public class GameController {
     @PostMapping("/addGame")
     public void setGame(@RequestBody Game game) {
     	this.gameRepository.save(game);
-    }
-
-    @PutMapping("updateGame")
-    public @ResponseBody String updateGame(@RequestBody Game game){
-        this.gameRepository.save(game);
-        return "Updated";
     }
     
 }

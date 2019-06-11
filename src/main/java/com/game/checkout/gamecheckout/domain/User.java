@@ -1,12 +1,14 @@
 package com.game.checkout.gamecheckout.domain;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
@@ -34,8 +36,11 @@ public class User {
     private LocalDateTime dateAdded = LocalDateTime.now(); 
 
     @Column(name = "LastModified")
-    private LocalDateTime lastModified = LocalDateTime.now(); //Is LocalDateTime an issue for JPA to convert?
-
+    private LocalDateTime lastModified = LocalDateTime.now();
+    
+    @OneToMany(mappedBy="User")
+    private List <History> histories;
+    
     public User() {} // default constructor
 
     public User(String name, String email, String password, LocalDateTime dateAdded, LocalDateTime lastModified) {
@@ -45,7 +50,6 @@ public class User {
         this.dateAdded = dateAdded;
         this.lastModified = lastModified;
     }
-
 
     public Long getUserId() {
         return this.userId;
