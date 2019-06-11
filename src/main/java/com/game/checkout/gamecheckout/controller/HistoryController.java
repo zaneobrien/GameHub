@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.game.checkout.gamecheckout.repository.HistoryRepository;
 
 @RestController
+// TODO: figure out how to add the server.address here to the CrossOrigin
 @CrossOrigin(origins = "http://localhost:4200")
 public class HistoryController {
 	
