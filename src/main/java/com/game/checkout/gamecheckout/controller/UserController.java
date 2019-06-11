@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 
 import javax.transaction.Transactional;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,10 +19,14 @@ import com.game.checkout.gamecheckout.domain.User;
 import com.game.checkout.gamecheckout.repository.UserRepository;
 
 @RestController
+// TODO: figure out how to add the server.address here to the CrossOrigin
 @CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
  
-	private final UserRepository userRepository;
+    private final UserRepository userRepository;
+    
+    @Value("${app.message}")
+    private String testing;
 	
     // standard constructor
     UserController(UserRepository userRepository){
@@ -30,6 +35,7 @@ public class UserController {
      
     @GetMapping("/users")
     public List<User> getUsers() {
+        System.out.println(testing);
         return (List<User>) userRepository.findAll();
     }
  
