@@ -9,17 +9,19 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 @Entity
+@Table(name="Game")
 public class Game {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "GameId")
-	private Integer gameId;
+	private Long gameId;
 
 	@NotNull(message = "Game title cannot be null")
 	@Column(name = "Title")
@@ -60,16 +62,12 @@ public class Game {
 	@Column(name = "LastModified")
 	private LocalDateTime lastModified;
 	
-	@OneToMany(mappedBy="Game")
-	private List <History> histories;
-	
 	public Game() {}
 	
 	public Game(String title, Integer minPlayerCount, Integer maxPlayerCount, Integer playTime, Integer age, Integer complexity,
 			String designer, String publisher, String yearPublished, String rating, LocalDateTime dateAdded,
 			LocalDateTime lastModified) {
 		super();
-		//this.gameId = gameId;
 		this.title = title;
 		this.minPlayerCount = minPlayerCount;
 		this.maxPlayerCount = maxPlayerCount;
@@ -84,7 +82,7 @@ public class Game {
 		this.lastModified = lastModified;
 	}
 
-	public Integer getGameId() {
+	public Long getGameId() {
 		return gameId;
 	}
 
@@ -136,7 +134,7 @@ public class Game {
 		return lastModified;
 	}
 
-	public void setGameId(Integer gameId) {
+	public void setGameId(Long gameId) {
 		this.gameId = gameId;
 	}
 

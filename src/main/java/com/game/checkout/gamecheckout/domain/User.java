@@ -9,10 +9,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
 @Entity
+@Table(name="User")
 public class User {
 
     @Id
@@ -36,9 +38,6 @@ public class User {
 
     @Column(name = "LastModified")
     private LocalDateTime lastModified = LocalDateTime.now();
-    
-    @OneToMany(mappedBy="User")
-    private List <History> histories;
     
     public User() {} // default constructor
 
