@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import com.game.checkout.gamecheckout.domain.User;
@@ -16,6 +15,8 @@ public interface UserRepository extends JpaRepository<User, Long>{
 	
 	// black magic reflection happening here
 	public Stream <User> findAllByEmail(String something);
+
+	public User findByEmail(String email);
 	
 	//public Stream <User> findAll();
 

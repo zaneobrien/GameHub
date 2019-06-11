@@ -24,7 +24,7 @@ public class DemoApplication {
     CommandLineRunner init(UserRepository userRepository, GameRepository gameRepository) {
         return args -> {
             Stream.of("John", "Julie", "Jennifer", "Helen", "Rachel").forEach(name -> {
-                User user = new User(name,name + "@domain.com","Passwordhere", LocalDateTime.now(), LocalDateTime.now());
+                User user = new User(name,name + "@domain.com", LocalDateTime.now(), LocalDateTime.now());
                 userRepository.save(user);
             });
             userRepository.findAll().forEach(p -> System.out.println(p));
