@@ -31,9 +31,6 @@ public class User {
     @Column(name = "Name")
     private String name;
 
-    //@Column(name = "Password")
-    //private String password; //Temporary Type
-
     @Column(name = "DateAdded")
     private LocalDateTime dateAdded = LocalDateTime.now(); 
 

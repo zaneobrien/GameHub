@@ -62,6 +62,21 @@ public class Game {
 	@Column(name = "LastModified")
 	private LocalDateTime lastModified;
 	
+	public enum Status {
+		OUT,
+		AVAILABLE;
+	}
+	
+	private Status status;
+	
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+	
+	public Status getStatus() {
+		return status;
+	}
+	
 	public Game() {}
 	
 	public Game(String title, Integer minPlayerCount, Integer maxPlayerCount, Integer playTime, Integer age, Integer complexity,
