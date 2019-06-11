@@ -24,12 +24,12 @@ public class DemoApplication {
     CommandLineRunner init(UserRepository userRepository, GameRepository gameRepository) {
         return args -> {
             Stream.of("John", "Julie", "Jennifer", "Helen", "Rachel").forEach(name -> {
-                User user = new User(name,name + "@domain.com","Passwordhere", LocalDateTime.now(), LocalDateTime.now());
+                User user = new User(name,name + "@domain.com", LocalDateTime.now(), LocalDateTime.now());
                 userRepository.save(user);
             });
             userRepository.findAll().forEach(p -> System.out.println(p));
             
-            Game dominion = new Game("Dominion", 2,4, 30, 13, 5, "david x vaccarino", "unknown", "2008", "4", LocalDateTime.now(), LocalDateTime.now());
+            Game dominion = new Game("Dominion", 2, 4, 30, 13, 5, "david x vaccarino", "unknown", "2008", "4", LocalDateTime.now(), LocalDateTime.now());
             gameRepository.save(dominion);
             //gameRepository.save(dominion);
         };
