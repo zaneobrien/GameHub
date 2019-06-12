@@ -80,7 +80,7 @@ public class Game {
 	public Game() {}
 	
 	public Game(String title, Integer minPlayerCount, Integer maxPlayerCount, Integer playTime, Integer age, Integer complexity,
-			String designer, String publisher, String yearPublished, String rating, LocalDateTime dateAdded,
+			String designer, String publisher, String yearPublished, String rating, Status status, LocalDateTime dateAdded,
 			LocalDateTime lastModified) {
 		super();
 		this.title = title;
@@ -93,6 +93,7 @@ public class Game {
 		this.publisher = publisher;
 		this.yearPublished = yearPublished;
 		this.rating = rating;
+		this.status = status;
 		this.dateAdded = dateAdded;
 		this.lastModified = lastModified;
 	}

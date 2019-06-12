@@ -1,9 +1,11 @@
 package com.game.checkout.gamecheckout.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,6 +27,19 @@ public class GameController {
     @GetMapping("/games")
     public List<Game> getGames() {
     	return (List<Game>) gameRepository.findAll();
+    }
+    
+    @GetMapping("/games/{id}")
+    public Game getGameById(@PathVariable String id) {
+    	
+    	System.out.println("id = " + id);
+    	
+    	Optional <Game> game = gameRepository.findById(Long.valueOf(id));
+    	if (game.isPresent()) {
+    		return game.get();
+    	} else {
+    		return null;
+    	}
     }
     
     @PostMapping("/addGame")

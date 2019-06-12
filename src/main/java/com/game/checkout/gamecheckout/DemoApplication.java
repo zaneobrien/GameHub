@@ -13,6 +13,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+
 @SpringBootApplication
 public class DemoApplication {
 
@@ -29,9 +30,14 @@ public class DemoApplication {
             });
             userRepository.findAll().forEach(p -> System.out.println(p));
             
-            Game dominion = new Game("Dominion", 2, 4, 30, 13, 5, "david x vaccarino", "unknown", "2008", "4", LocalDateTime.now(), LocalDateTime.now());
+            Game dominion = new Game("Dominion", 2, 4, 30, 13, 5, "david x vaccarino", "unknown", "2008", "4", Game.Status.AVAILABLE, LocalDateTime.now(), LocalDateTime.now());
+            Game starRealms = new Game("Star Realms", 2, 4, 30, 13, 5, "", "", "2015", "4", Game.Status.OUT, LocalDateTime.now(), LocalDateTime.now());
+            Game catan = new Game("Settlers of Catan", 3, 4, 60, 13, 5, "Klaus Teuber", "", "1998", "5", Game.Status.AVAILABLE, LocalDateTime.now(), LocalDateTime.now());
+            
             gameRepository.save(dominion);
-            //gameRepository.save(dominion);
+            gameRepository.save(starRealms);
+            gameRepository.save(catan);
+            
             gameRepository.findAll().forEach(g -> System.out.println(g));
         };
         
