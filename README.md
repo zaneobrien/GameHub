@@ -1,4 +1,4 @@
-# GameCheckoutBackend
+# GameHub
 Back-end side of an app to checkout games
 
 ## Build
