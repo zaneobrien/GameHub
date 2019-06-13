@@ -31,10 +31,9 @@ public class GameController {
     
     @GetMapping("/games/{id}")
     public Game getGameById(@PathVariable String id) {
-    	
-    	System.out.println("id = " + id);
-    	
+    	   	
     	Optional <Game> game = gameRepository.findById(Long.valueOf(id));
+    	
     	if (game.isPresent()) {
     		return game.get();
     	} else {
