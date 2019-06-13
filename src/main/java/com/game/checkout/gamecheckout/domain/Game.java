@@ -42,7 +42,7 @@ public class Game {
 	private Integer age;
 
 	@Column(name = "Complexity")
-	private Integer complexity;
+	private String complexity;
 
 	@Column(name = "Designer")
 	private String designer;
@@ -79,7 +79,7 @@ public class Game {
 	
 	public Game() {}
 	
-	public Game(String title, Integer minPlayerCount, Integer maxPlayerCount, Integer playTime, Integer age, Integer complexity,
+	public Game(String title, Integer minPlayerCount, Integer maxPlayerCount, Integer playTime, Integer age, String complexity,
 			String designer, String publisher, String yearPublished, String rating, Status status, LocalDateTime dateAdded,
 			LocalDateTime lastModified) {
 		super();
@@ -122,7 +122,7 @@ public class Game {
 		return age;
 	}
 
-	public Integer getComplexity() {
+	public String getComplexity() {
 		return complexity;
 	}
 
@@ -174,7 +174,7 @@ public class Game {
 		this.age = age;
 	}
 
-	public void setComplexity(Integer complexity) {
+	public void setComplexity(String complexity) {
 		this.complexity = complexity;
 	}
 
