@@ -65,6 +65,15 @@ public class Game {
 	public enum Status {
 		OUT,
 		AVAILABLE;
+		
+		public Status toggle() {
+			if (this.equals(OUT)) {
+				return AVAILABLE;
+			}
+			else {
+				return OUT;
+			}
+		}
 	}
 	
 	private Status status;

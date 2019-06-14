@@ -21,6 +21,9 @@ public class History {
     @Column(name = "HistoryId")
     private Long historyId;
 
+    @Column(name = "Action")
+    private Action action;
+    
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "UserId")
     private User user;
@@ -29,30 +32,42 @@ public class History {
     @JoinColumn(name = "GameId")
     private Game game;
 
-    @Column(name = "DateCheckedOut")
-    private LocalDateTime dateCheckedOut;
+    @Column(name = "Timestamp")
+    private LocalDateTime timestamp;
 
-    @Column(name = "DateCheckedIn")
-    private LocalDateTime dateCheckedIn;
+    public enum Action {
+    	CHECKOUT,
+    	CHECKIN;
+    	
+    	public Action toggle() {
+    		if (this.equals(CHECKOUT)) {
+    			return CHECKIN;
+    		}
+    		else {
+    			return CHECKOUT;
+    		}
+    	}
+    }
 
     public History() {}
-
-    public History(LocalDateTime dateCheckedOut, LocalDateTime dateCheckedIn){
-       
-        this.dateCheckedOut = dateCheckedOut;
-        this.dateCheckedIn = dateCheckedIn;
+    
+    public History(Action action, User user, Game game, LocalDateTime timestamp) {
+    	this.action = action;
+    	this.user = user;
+    	this.game = game;
+    	this.timestamp = timestamp;
     }
 
     public Long getHistoryId(){
         return this.historyId;
     }
 
-    public LocalDateTime getDateCheckedOut(){
-        return this.dateCheckedOut;
+    public User getUser() {
+    	return this.user;
     }
-
-    public LocalDateTime getDateCheckedIn(){
-        return this.dateCheckedIn;
+    
+    public Game getGame() {
+    	return this.game;
     }
 
 }
