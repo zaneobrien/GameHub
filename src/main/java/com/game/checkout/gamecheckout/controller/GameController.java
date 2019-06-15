@@ -88,6 +88,23 @@ public class GameController {
     	return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
     
+    @PostMapping("/games/{id}/checkout")
+    public ResponseEntity<History> checkout(@PathVariable String id, @RequestBody User user) {
+    	Optional<Game> game = gameRepository.findById(Long.valueOf(id));
+    	if (game.isPresent()) {
+    		Game.Status oldStatus = game.get().getStatus();	
+    		if (game.get().getStatus().equals(Game.Status.AVAILABLE)) {
+    			game.get().setStatus(oldStatus.toggle());
+        		gameRepository.save(game.get());
+        		History history = new History(Action.CHECKOUT, user, game.get(), LocalDateTime.now());
+        		historyRepository.save(history);
+        		return new ResponseEntity<History>(history, HttpStatus.ACCEPTED);
+    		}
+    		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+    	return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+    
     @GetMapping("/games/{id}/status") 
     public ResponseEntity<Game.Status> getStatus(@PathVariable String id) {
     	Optional<Game> game = gameRepository.findById(Long.valueOf(id));

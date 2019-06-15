@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name="History")
 public class History {
@@ -24,10 +26,12 @@ public class History {
     @Column(name = "Action")
     private Action action;
     
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "UserId")
     private User user;
     
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "GameId")
     private Game game;
@@ -62,12 +66,20 @@ public class History {
         return this.historyId;
     }
 
+    public Action getAction() {
+    	return this.action;
+    }
+    
     public User getUser() {
     	return this.user;
     }
     
     public Game getGame() {
     	return this.game;
+    }
+    
+    public LocalDateTime getTimestamp() {
+    	return this.timestamp;
     }
 
 }

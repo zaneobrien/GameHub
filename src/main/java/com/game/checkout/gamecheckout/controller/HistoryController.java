@@ -1,9 +1,13 @@
 package com.game.checkout.gamecheckout.controller;
 
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,13 +30,14 @@ public class HistoryController {
 	}
 	
 	@GetMapping("/history")
-	public List <History> findAll() {
-		return (List <History>) historyRepository.findAll();
+	public ResponseEntity<List <History>> findAll() {
+		List <History> histories = (List <History>) historyRepository.findAll();
+		return new ResponseEntity<List<History>>(histories, HttpStatus.OK);
 	}
 	
-	@GetMapping("/history/user/{id}")
+	@GetMapping("/history/{id}")
 	public List <History> findAllById(@PathVariable Long id) {
-		return findAll().stream().filter(h -> h.getUser().getUserId() == id).collect(Collectors.toList());
+		return (List<History>) historyRepository.findAllById(Arrays.asList(id));
 	}
 	
 	@PostMapping("/history")
