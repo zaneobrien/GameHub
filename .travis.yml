@@ -9,6 +9,7 @@ before_script:
 
 script:
   - cd GameHub-frontend
+  - npm install
   - ng build
   - cd ..
   - mvn install
