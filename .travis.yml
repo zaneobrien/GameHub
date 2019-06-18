@@ -2,6 +2,7 @@ language: java
 
 before_install:
    - chmod +x mvnw
+     # install latest version of node, the default version isnt compatable with the latest angular cli
    - nvm install node
 
 before_script:
