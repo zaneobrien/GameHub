@@ -1,8 +1,8 @@
 language: java
 
 before_install:
-  - chmod +x mvnw
-  - cd bin/game-checkout-backend/
+   - cd bin/game-checkout-backend/
+   - chmod +x mvnw
 
 before_script:
   - npm install -g angular-cli
