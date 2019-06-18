@@ -1,7 +1,8 @@
 language: java
+  jdk:
+    - oraclejdk8
 
 before_install:
-   - cd bin/game-checkout-backend/
    - chmod +x mvnw
 
 before_script:
