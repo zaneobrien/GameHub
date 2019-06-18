@@ -1,5 +1,10 @@
 language: java
 
+# Add this later once we are using gitflow and things work
+# branches:
+  # only:
+    # - master
+
 before_install:
    - chmod +x mvnw
      # install latest version of node, the default version isnt compatable with the latest angular cli
