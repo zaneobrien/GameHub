@@ -1,0 +1,26 @@
+language: java
+jdk: oraclejdk8
+
+before_script:
+  - npm install -g angular-cli
+
+script:
+  - cd GameHub-frontend
+  - ng build
+  - cd ..
+  - mvn install
+  - mvn clean package
+
+deploy:
+  skip_cleanup: true
+  provider: elasticbeanstalk
+  access-key-id: $AWS_ACCESS_KEY
+  secret-access-key: $AWS_SECRET_KEY
+  region: us-west-2
+  app: GameHub
+  env: Gamehub-env
+  bucket_name: gamehub-bucket
+  zip_file: './target/gamecheckoutbackend-0.0.1-SNAPSHOT.war'
+
+  on:  
+    branch: development
