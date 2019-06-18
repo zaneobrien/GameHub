@@ -1,5 +1,8 @@
 language: java
 
+node_js:
+ - "node"
+
 before_install:
    - chmod +x mvnw
 
