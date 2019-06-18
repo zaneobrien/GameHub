@@ -1,5 +1,8 @@
 language: java
 
+before_install:
+  - chmod +x mvnw
+
 before_script:
   - npm install -g angular-cli
 
