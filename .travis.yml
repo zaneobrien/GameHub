@@ -25,3 +25,5 @@ deploy:
   env: Gamehub-env
   bucket_name: gamehub-bucket
   zip_file: './target/gamecheckoutbackend-0.0.1-SNAPSHOT.war'
+  on:
+    branch: development
