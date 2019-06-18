@@ -4,7 +4,7 @@ before_install:
    - chmod +x mvnw
 
 before_script:
-  - npm install -g angular-cli
+  - npm install -g @angular/cli
 
 script:
   - cd GameHub-frontend
