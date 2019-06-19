@@ -1,4 +1,5 @@
 language: java
+jdk: oraclejdk8
 
 # Add this later once we are using gitflow and things work
 # branches:
