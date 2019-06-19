@@ -9,6 +9,7 @@ import com.game.checkout.gamecheckout.repository.GameRepository;
 import com.game.checkout.gamecheckout.repository.UserRepository;
 
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -19,7 +20,10 @@ public class DemoApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
-	}
+    }
+
+    @Value("${app.message}")
+    private String testing;
 
 	@Bean
     CommandLineRunner init(UserRepository userRepository, GameRepository gameRepository) {
@@ -36,6 +40,7 @@ public class DemoApplication {
             Game carcassonne = new Game("Carcassonne", 2, 5, 30, 13, "Medium Light", "Klaus-Jürgen Wrede", "Hans im Glück", "2000", "7.4", Game.Status.AVAILABLE, LocalDateTime.now(), LocalDateTime.now());
             Game kingOfTokyo = new Game("King of Tokyo", 2, 5, 45, 13, "Light", "Richard Garfield", "IELLO", "2011", "7.2", Game.Status.OUT, LocalDateTime.now(), LocalDateTime.now());
             
+            System.out.println(testing);
             
             gameRepository.save(dominion);
             gameRepository.save(starRealms);
