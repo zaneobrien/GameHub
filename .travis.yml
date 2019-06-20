@@ -18,7 +18,6 @@ script:
   - cd GameHub-frontend
   - npm install
   - ng build
-  - ng serve
   - cd ..
   - mvn install
   - mvn clean package
