@@ -84,7 +84,7 @@
 					  <outputDirectory>${basedir}/target/classes/static/</outputDirectory >
 					  <resources>
 						<resource>
-						  <directory>${basedir}/GameHub-frontend/dist</directory >
+						  <directory>${basedir}/GameHub-frontend/dist</directory>
 						</resource>
 					  </resources>
 					</configuration>
