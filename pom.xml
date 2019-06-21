@@ -78,13 +78,13 @@
 				<executions>
 				  <execution>
 					<id>copy-resources</id>
-					<phase>validate</phase> 
+					<phase>validate</phase>
 					<goals><goal>copy-resources</goal></goals>
 					<configuration>
 					  <outputDirectory>${basedir}/target/classes/static/</outputDirectory >
 					  <resources>
 						<resource>
-						  <directory>${basedir}/GameHub-frontend/dist</directory >
+						  <directory>${basedir}/../GameHub-frontend/dist</directory >
 						</resource>
 					  </resources>
 					</configuration>
