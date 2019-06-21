@@ -20,7 +20,6 @@ script:
   - ng build
   - cd ..
   - mvn install
-  - mvn clean package
 
 deploy:
   skip_cleanup: true
