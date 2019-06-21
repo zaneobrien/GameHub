@@ -30,7 +30,7 @@ public class DemoApplication {
         return args -> {
             Stream.of("John", "Julie", "Jennifer", "Helen", "Rachel").forEach(name -> {
                 User user = new User(name,name + "@domain.com", LocalDateTime.now(), LocalDateTime.now());
-                userRepository.save(user);
+                //userRepository.save(user);
             });
             userRepository.findAll().forEach(p -> System.out.println(p));
             
@@ -42,11 +42,11 @@ public class DemoApplication {
             
             System.out.println(testing);
             
-            gameRepository.save(dominion);
-            gameRepository.save(starRealms);
-            gameRepository.save(catan);
-            gameRepository.save(carcassonne);
-            gameRepository.save(kingOfTokyo);
+            //gameRepository.save(dominion);
+            //gameRepository.save(starRealms);
+            //gameRepository.save(catan);
+            //gameRepository.save(carcassonne);
+            //gameRepository.save(kingOfTokyo);
             
             gameRepository.findAll().forEach(g -> System.out.println(g));
         };
