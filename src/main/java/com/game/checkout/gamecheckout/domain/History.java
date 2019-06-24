@@ -4,11 +4,18 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
+@Table(name="History")
 public class History {
 
     @Id
@@ -16,45 +23,63 @@ public class History {
     @Column(name = "HistoryId")
     private Long historyId;
 
-    @Column(name = "UserId")
-    private Long userId;
+    @Column(name = "Action")
+    private Action action;
     
-    @Column(name = "GameId")
-    private Long gameId;
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "UserId")
+    private User user;
+    
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "GameId")
+    private Game game;
 
-    @Column(name = "DateCheckedOut")
-    private LocalDateTime dateCheckedOut;
+    @Column(name = "Timestamp")
+    private LocalDateTime timestamp;
 
-    @Column(name = "DateCheckedIn")
-    private LocalDateTime dateCheckedIn;
+    public enum Action {
+    	CHECKOUT,
+    	CHECKIN;
+    	
+    	public Action toggle() {
+    		if (this.equals(CHECKOUT)) {
+    			return CHECKIN;
+    		}
+    		else {
+    			return CHECKOUT;
+    		}
+    	}
+    }
 
     public History() {}
-
-    public History(Long userId, Long gameId, LocalDateTime dateCheckedOut, LocalDateTime dateCheckedIn){
-        this.userId = userId;
-        this.gameId = gameId;
-        this.dateCheckedOut = dateCheckedOut;
-        this.dateCheckedIn = dateCheckedIn;
+    
+    public History(Action action, User user, Game game, LocalDateTime timestamp) {
+    	this.action = action;
+    	this.user = user;
+    	this.game = game;
+    	this.timestamp = timestamp;
     }
 
     public Long getHistoryId(){
         return this.historyId;
     }
 
-    public Long getUserId(){
-        return this.userId;
+    public Action getAction() {
+    	return this.action;
     }
-
-    public Long getGameId(){
-        return this.gameId;
+    
+    public User getUser() {
+    	return this.user;
     }
-
-    public LocalDateTime getDateCheckedOut(){
-        return this.dateCheckedOut;
+    
+    public Game getGame() {
+    	return this.game;
     }
-
-    public LocalDateTime getDateCheckedIn(){
-        return this.dateCheckedIn;
+    
+    public LocalDateTime getTimestamp() {
+    	return this.timestamp;
     }
 
 }

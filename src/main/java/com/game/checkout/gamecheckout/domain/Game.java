@@ -9,17 +9,19 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 @Entity
+@Table(name="Game")
 public class Game {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "GameId")
-	private Integer gameId;
+	private Long gameId;
 
 	@NotNull(message = "Game title cannot be null")
 	@Column(name = "Title")
@@ -40,7 +42,7 @@ public class Game {
 	private Integer age;
 
 	@Column(name = "Complexity")
-	private Integer complexity;
+	private String complexity;
 
 	@Column(name = "Designer")
 	private String designer;
@@ -60,16 +62,36 @@ public class Game {
 	@Column(name = "LastModified")
 	private LocalDateTime lastModified;
 	
-	@OneToMany(mappedBy="Game")
-	private List <History> histories;
+	public enum Status {
+		OUT,
+		AVAILABLE;
+		
+		public Status toggle() {
+			if (this.equals(OUT)) {
+				return AVAILABLE;
+			}
+			else {
+				return OUT;
+			}
+		}
+	}
+	
+	private Status status;
+	
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+	
+	public Status getStatus() {
+		return status;
+	}
 	
 	public Game() {}
 	
-	public Game(String title, Integer minPlayerCount, Integer maxPlayerCount, Integer playTime, Integer age, Integer complexity,
-			String designer, String publisher, String yearPublished, String rating, LocalDateTime dateAdded,
+	public Game(String title, Integer minPlayerCount, Integer maxPlayerCount, Integer playTime, Integer age, String complexity,
+			String designer, String publisher, String yearPublished, String rating, Status status, LocalDateTime dateAdded,
 			LocalDateTime lastModified) {
 		super();
-		//this.gameId = gameId;
 		this.title = title;
 		this.minPlayerCount = minPlayerCount;
 		this.maxPlayerCount = maxPlayerCount;
@@ -80,11 +102,12 @@ public class Game {
 		this.publisher = publisher;
 		this.yearPublished = yearPublished;
 		this.rating = rating;
+		this.status = status;
 		this.dateAdded = dateAdded;
 		this.lastModified = lastModified;
 	}
 
-	public Integer getGameId() {
+	public Long getGameId() {
 		return gameId;
 	}
 
@@ -108,7 +131,7 @@ public class Game {
 		return age;
 	}
 
-	public Integer getComplexity() {
+	public String getComplexity() {
 		return complexity;
 	}
 
@@ -136,7 +159,7 @@ public class Game {
 		return lastModified;
 	}
 
-	public void setGameId(Integer gameId) {
+	public void setGameId(Long gameId) {
 		this.gameId = gameId;
 	}
 
@@ -160,7 +183,7 @@ public class Game {
 		this.age = age;
 	}
 
-	public void setComplexity(Integer complexity) {
+	public void setComplexity(String complexity) {
 		this.complexity = complexity;
 	}
 

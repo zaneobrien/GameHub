@@ -9,10 +9,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
 @Entity
+@Table(name="User")
 public class User {
 
     @Id
@@ -20,16 +22,14 @@ public class User {
     @Column(name = "UserId")
     private Long userId;
 
+    //Used as login username
+    @Email(message = "Please enter a valid email")
+    @Column(name = "Email", unique = true)
+    private String email;
+
     @NotNull(message = "Name is required to enter a User")
     @Column(name = "Name")
     private String name;
-
-    @Email(message = "Please enter a valid email")
-    @Column(name = "Email")
-    private String email;
-
-    @Column(name = "Password")
-    private String password; //Temporary Type
 
     @Column(name = "DateAdded")
     private LocalDateTime dateAdded = LocalDateTime.now(); 
@@ -37,15 +37,12 @@ public class User {
     @Column(name = "LastModified")
     private LocalDateTime lastModified = LocalDateTime.now();
     
-    @OneToMany(mappedBy="User")
-    private List <History> histories;
-    
     public User() {} // default constructor
 
-    public User(String name, String email, String password, LocalDateTime dateAdded, LocalDateTime lastModified) {
+    public User(String name, String email, LocalDateTime dateAdded, LocalDateTime lastModified) {
         this.name = name;
         this.email = email;
-        this.password = password;
+        //this.password = password;
         this.dateAdded = dateAdded;
         this.lastModified = lastModified;
     }
@@ -62,9 +59,9 @@ public class User {
         return this.email;
     }
 
-    public String getPassword(){
+    /*public String getPassword(){
         return this.password;
-    }
+    }*/
 
     public LocalDateTime getDateAdded(){
         return this.dateAdded;
@@ -72,6 +69,26 @@ public class User {
 
     public LocalDateTime getLastModified(){
         return this.lastModified;
+    }
+	public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
+    /*public void setPassword(String password) {
+        this.password = password;
+    }*/
+
+    public void setDateAdded(LocalDateTime dateAdded) {
+        this.dateAdded = dateAdded;
+    }
+    public void setLastModified(LocalDateTime lastModified) {
+        this.lastModified = lastModified;
     }
     
     public String toString() {
