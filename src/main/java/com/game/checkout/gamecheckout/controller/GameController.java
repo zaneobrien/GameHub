@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,6 +21,7 @@ import com.game.checkout.gamecheckout.domain.History.Action;
 import com.game.checkout.gamecheckout.domain.User;
 import com.game.checkout.gamecheckout.repository.GameRepository;
 import com.game.checkout.gamecheckout.repository.HistoryRepository;
+import com.game.checkout.gamecheckout.repository.UserRepository;
 
 @RestController
 // TODO: figure out how to add the server.address here to the CrossOrigin
@@ -28,10 +30,12 @@ public class GameController {
 
 	private final GameRepository gameRepository;
 	private final HistoryRepository historyRepository;
+	private final UserRepository userRepository;
 	
-    GameController(GameRepository gameRepository, HistoryRepository historyRepository){
+    GameController(GameRepository gameRepository, HistoryRepository historyRepository, UserRepository userRepository){
         this.gameRepository = gameRepository;
         this.historyRepository = historyRepository;
+        this.userRepository = userRepository;
     }
     
     @GetMapping("/games")
@@ -82,6 +86,26 @@ public class GameController {
         		History history = new History(Action.CHECKIN, user, game.get(), LocalDateTime.now());
         		historyRepository.save(history);
         		return new ResponseEntity<History>(history, HttpStatus.ACCEPTED);
+    		}
+    		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+    	return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+    
+    @PutMapping("/games/{gameId}/checkinById/{userId}")
+    public ResponseEntity<History> checkinById(@PathVariable String gameId, @PathVariable String userId) {
+    	Optional<Game> game = gameRepository.findById(Long.valueOf(gameId));
+    	Optional<User> user = userRepository.findById(Long.valueOf(userId));
+    	if (game.isPresent()) {
+    		Game.Status oldStatus = game.get().getStatus();	
+    		if (game.get().getStatus().equals(Game.Status.OUT)) {
+    			game.get().setStatus(oldStatus.toggle());
+        		gameRepository.save(game.get());
+        		if(user.isPresent() && game.isPresent()) {
+	        		History history = new History(Action.CHECKIN, user.get(), game.get(), LocalDateTime.now());
+	        		historyRepository.save(history);
+	        		return new ResponseEntity<History>(history, HttpStatus.ACCEPTED);
+        		}
     		}
     		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
