@@ -1,10 +1,9 @@
 language: java
 jdk: openjdk8
 
-# Add this later once we are using gitflow and things work
-# branches:
-  # only:
-    # - master
+branches:
+  only:
+    - master
 
 before_install:
    - chmod +x mvnw
@@ -32,4 +31,4 @@ deploy:
   bucket_name: gamehub-bucket
   zip_file: './target/gamecheckoutbackend-0.0.1-SNAPSHOT.war'
   on:
-    branch: development
+    branch: master
