@@ -5,21 +5,6 @@ branches:
   only:
     - master
 
-before_install:
-   - chmod +x mvnw
-     # install latest version of node, the default version isnt compatable with the latest angular cli
-   - nvm install node
-
-before_script:
-  - npm install -g @angular/cli
-
-script:
-  - cd GameHub-frontend
-  - npm install
-  - ng build
-  - cd ..
-  - mvn install
-
 deploy:
   skip_cleanup: true
   provider: elasticbeanstalk
@@ -27,7 +12,7 @@ deploy:
   secret-access-key: $AWS_SECRET_KEY
   region: us-west-2
   app: GameHub
-  env: Gamehub-env
+  env: Gamehub-env-1
   bucket_name: gamehub-bucket
   zip_file: './target/gamecheckoutbackend-0.0.1-SNAPSHOT.war'
   on:
