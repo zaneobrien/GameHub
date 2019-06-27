@@ -5,6 +5,9 @@ branches:
   only:
     - master
 
+before_install:
+   - chmod +x mvnw
+
 deploy:
   skip_cleanup: true
   provider: elasticbeanstalk
